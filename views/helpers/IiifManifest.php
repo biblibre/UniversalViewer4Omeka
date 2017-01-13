@@ -90,7 +90,6 @@ class UniversalViewer_View_Helper_IiifManifest extends Zend_View_Helper_Abstract
         $title = isset($elementTexts['Dublin Core']['Title'][0])
             ? $elementTexts['Dublin Core']['Title'][0]
             : __('[Untitled]');
-        $description = metadata($record, 'citation', array('no_escape' => true));
         $licence = apply_filters('uv_item_manifest_licence', get_option('universalviewer_licence'), array('record' => $record));
         $attribution = apply_filters('uv_item_manifest_attribution', get_option('universalviewer_attribution'), array('record' => $record));
 
@@ -362,9 +361,6 @@ class UniversalViewer_View_Helper_IiifManifest extends Zend_View_Helper_Abstract
         $manifest['@id'] = $url;
         $manifest['@type'] = 'sc:Manifest';
         $manifest['label'] = $title;
-        if ($description) {
-            $manifest['description'] = $description;
-        }
         if ($thumbnail) {
             $manifest['thumbnail'] = $thumbnail;
         }

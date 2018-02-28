@@ -4,6 +4,8 @@
   "description": "Universal Viewer (plugin for Omeka)",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run sync",
+    "sync": "rm -rf views/shared/javascripts/uv && cp -R node_modules/universalviewer/uv views/shared/javascripts/uv",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +25,6 @@
     "gulp-rename": "^1.2.2"
   },
   "dependencies": {
-    "universalviewer": "github:universalviewer/universalviewer#master"
+    "universalviewer": "^3.0.22"
   }
 }

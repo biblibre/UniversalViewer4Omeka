@@ -2,3 +2,4 @@
 .php_cs.cache
 node_modules
 debug.log
+/views/shared/javascripts/uv/

@@ -127,41 +127,14 @@ class UniversalViewer_View_Helper_UniversalViewer extends Zend_View_Helper_Abstr
      */
     protected function _display($urlManifest, $options = array())
     {
-        $class = isset($options['class'])
-            ? $options['class']
-            : get_option('universalviewer_class');
-        if (!empty($class)) {
-            $class = ' ' . $class;
-        }
+        $urlJs = src('UniversalViewer', 'javascripts', 'js');
+        $uvJs = src('uv', 'javascripts/uv', 'js');
 
-        $locale = isset($options['locale'])
-            ? $options['locale']
-            : get_option('universalviewer_locale');
-        if (!empty($locale)) {
-            $locale = ' data-locale="' . $locale . '"';
-        }
+        $html = '';
+        $html .= sprintf('<div id="uv" class="uv" data-manifest="%s"></div>', $urlManifest);
+        $html .= sprintf('<script type="text/javascript" src="%s"></script>', $urlJs);
+        $html .= sprintf('<script type="text/javascript" src="%s"></script>', $uvJs);
 
-        $style = isset($options['style'])
-            ? $options['style']
-            : get_option('universalviewer_style');
-        if (!empty($style)) {
-            $style = ' style="' . $style . '"';
-        }
-
-        // Default configuration file.
-        $config = empty($options['config'])
-            ? src('config', 'universal-viewer', 'json')
-            : $options['config'];
-        $urlJs = src('embed', 'javascripts/uv/lib', 'js');
-
-        $html = sprintf('<div class="uv%s" data-config="%s" data-uri="%s"%s%s></div>',
-            $class,
-            $config,
-            $urlManifest,
-            $locale,
-            $style);
-        $html .= sprintf('<script type="text/javascript" id="embedUV" src="%s"></script>', $urlJs);
-        $html .= '<script type="text/javascript">/* wordpress fix */</script>';
         return $html;
     }
 }
